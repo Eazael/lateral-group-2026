@@ -2,7 +2,6 @@ using backend.Database.Context;
 using backend.Database.Entity;
 using Microsoft.AspNetCore.Mvc;
 using backend.Dto;
-using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,11 +10,14 @@ builder.Services.AddValidation();
 
 var app = builder.Build();
 
-app.MapGet("/tasks", async (TaskContext taskContext) => 
+app.MapGet("/tasks", async (TaskContext taskContext, bool? finished) => 
 {
     try
     {
-        var tasks = taskContext.Tasks.OrderBy(task => task.Id).ToList();
+        var taskFilter = finished is null
+            ? taskContext.Tasks
+            : taskContext.Tasks.Where(task => task.Finished == finished);
+        var tasks = taskFilter.OrderBy(task => task.Id).ToList();
         return Results.Ok(tasks);
     }
     catch (Exception ex)
@@ -28,6 +30,7 @@ app.MapPost("/tasks", async ([FromBody] ProgrammedTask task, TaskContext taskCon
 {
     try
     {
+
         await taskContext.Tasks.AddAsync(task, cancellationToken);
         var saved = await taskContext.SaveChangesAsync(cancellationToken);
         return saved == 1 
