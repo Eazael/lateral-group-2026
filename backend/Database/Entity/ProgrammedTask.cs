@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using backend.Dto;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace backend.Database.Entity
@@ -15,7 +16,12 @@ namespace backend.Database.Entity
         [MaxLength(512, ErrorMessage = "The task description has to be less than 512 characters.")]
         public required string Description { get; set; }
 
-        public bool Finished { get; set; }
+        public bool Finished { get; set; } = false;
+
+        public void Update(UpdateTask updateData)
+        {
+            Finished = updateData.Finished;
+        }
 
     }
 }
