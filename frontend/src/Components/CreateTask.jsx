@@ -3,9 +3,11 @@ import { useState } from "react";
 import { createNewTask } from "../Services/FetchServices";
 import { GlobalContext } from "../Context/GlobalContext";
 import { useContext } from "react";
+import ErrorMessage from "./ErrorMessage";
 
-function CreateTask({ reloadData, setErrorData }) {
+function CreateTask({ reloadData }) {
     const {globalData} = useContext(GlobalContext);
+    const [errorData, setErrorData] = useState(null)
     const[description, setDescription] = useState("");
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -34,6 +36,10 @@ function CreateTask({ reloadData, setErrorData }) {
                         Please enter a description between 3 and 512 characters long
                     </Form.Text>
                 </Form.Group>
+                <ErrorMessage
+                    error={errorData}
+                    setError={setErrorData}
+                />
                 <Button variant="primary" type="submit">Save new Task</Button>
             </Form>
         </div>

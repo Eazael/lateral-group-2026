@@ -5,6 +5,7 @@ import Layout from './Components/Layout'
 import TaskList from './Components/TaskList'
 import { getTasks, updateFinished } from './Services/FetchServices'
 import CreateTask from './Components/CreateTask'
+import ErrorMessage from './Components/ErrorMessage'
 
 function App() {
   const [globalData, setGlobalData] = useState(new GlobalData())
@@ -21,8 +22,10 @@ function App() {
     }
 
     const setChecked = async(id, finished) => {
-        await updateFinished(globalData, id, finished, setErrorData)
-        await loadData()
+        var updated = await updateFinished(globalData, id, finished, setErrorData)
+        if (updated) {
+          await loadData()
+        }
     }
 
     useEffect(() => {
@@ -34,19 +37,23 @@ function App() {
       <Layout>
         <CreateTask
           reloadData={loadData}
-          setErrorData={setErrorData}
         />
-        <TaskList
+        <ErrorMessage 
+          error={errorData} 
+          setError={setErrorData}
+        />        <TaskList
           title="Pending tasks"
           tasks={pendingTasks}
           setChecked={setChecked}
           actionText="Mark as finished"
+          reloadData={loadData}
         />
         <TaskList
           title="Finished tasks"
           tasks={finishedTasks}
           setChecked={setChecked}
           actionText="Mark as pending"
+          reloadData={loadData}
         />
       </Layout>
     </GlobalContext.Provider>

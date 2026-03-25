@@ -1,3 +1,5 @@
+import ErrorData from "../Classes/ErrorData";
+
 const headers = {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
@@ -12,10 +14,10 @@ const fetchData = async (url, configuration, setErrorData) => {
             setErrorData(null)
             return responseData
         } else {
-            setErrorData(new Error(responseData.message))
+            setErrorData(new ErrorData(responseData.message, responseData))
         }
     } catch (error) {
-        setErrorData(new Error(error.message))
+        setErrorData(new ErrorData(error.message, null))
     }
     return null
 }
@@ -28,10 +30,10 @@ const saveData = async (url, configuration, setErrorData) => {
             setErrorData(null)
             return true
         } else {
-            setErrorData(new Error(responseData.message))
+            setErrorData(new ErrorData(responseData.message, responseData))
         }
     } catch (error) {
-        setErrorData(new Error(error.message))
+        setErrorData(new ErrorData(error.message, null))
     }
     return false
 }
@@ -66,4 +68,12 @@ const createNewTask = async(globalData, description, setErrorData) => {
         }, setErrorData)
 }
 
-export { getTasks, updateFinished, createNewTask }
+const deleteTask = async(globalData, id, setErrorData) => {
+    return await saveData(globalData.backendUrl + '/tasks/' + id, {
+            method: 'DELETE',
+            headers: headers,
+            mode: corsMode
+        }, setErrorData)
+}
+
+export { getTasks, updateFinished, createNewTask, deleteTask }

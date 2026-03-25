@@ -75,4 +75,25 @@ app.MapPatch("/tasks/{id}", async (int id, [FromBody] UpdateTask updateData, Tas
     }
 });
 
+app.MapDelete("/tasks/{id}", async (int id, TaskContext taskContext, CancellationToken cancellationToken) =>
+{
+    try
+    {
+        var taskToDelete = await taskContext.Tasks.FindAsync(new object[] { id }, cancellationToken);
+        if (taskToDelete is null)
+        {
+            return Results.NotFound(new ResponseMessage($"A task with the id {id} was not found."));
+        }
+        taskContext.Remove(taskToDelete);
+        var deleted = await taskContext.SaveChangesAsync(cancellationToken);
+        return deleted == 1
+            ? Results.Ok(new ResponseMessage("The task was deleted successfully"))
+            : Results.Problem("The task could not be deleted in the database.");
+    }
+    catch (Exception ex)
+    {
+        return Results.Problem(ex.Message);
+    }
+});
+
 app.Run();
