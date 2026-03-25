@@ -1,12 +1,3 @@
-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100vw;
-  overflow: scroll;
-}
-
 #root {
   margin: 40px;
 }

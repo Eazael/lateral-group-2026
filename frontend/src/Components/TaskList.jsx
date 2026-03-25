@@ -36,6 +36,7 @@ function TaskList({ title, tasks, setChecked, actionText, reloadData }) {
                     <tr>
                         <td>#</td>
                         { taskColumns.map(column => (<th key={column.name} id={column.name}>{column.title}</th>) ) }
+                        <td>Action</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -68,7 +69,7 @@ function TaskList({ title, tasks, setChecked, actionText, reloadData }) {
                             </td>
                         </tr>
                     )) : (
-                        <tr><td colSpan={2}>No tasks available</td></tr>
+                        <tr><td colSpan={3}>No tasks available</td></tr>
                         ) }
                 </tbody>
             </Table>

@@ -6,6 +6,7 @@ import TaskList from './Components/TaskList'
 import { getTasks, updateFinished } from './Services/FetchServices'
 import CreateTask from './Components/CreateTask'
 import ErrorMessage from './Components/ErrorMessage'
+import { Row, Col } from 'react-bootstrap';
 
 function App() {
   const [globalData, setGlobalData] = useState(new GlobalData())
@@ -35,26 +36,41 @@ function App() {
   return (
     <GlobalContext.Provider value={{globalData, setGlobalData}}>
       <Layout>
-        <CreateTask
-          reloadData={loadData}
-        />
-        <ErrorMessage 
-          error={errorData} 
-          setError={setErrorData}
-        />        <TaskList
-          title="Pending tasks"
-          tasks={pendingTasks}
-          setChecked={setChecked}
-          actionText="Mark as finished"
-          reloadData={loadData}
-        />
-        <TaskList
-          title="Finished tasks"
-          tasks={finishedTasks}
-          setChecked={setChecked}
-          actionText="Mark as pending"
-          reloadData={loadData}
-        />
+        <Row>
+          <Col>
+            <CreateTask
+              reloadData={loadData}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <ErrorMessage
+              error={errorData}
+              setError={setErrorData}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <TaskList
+              title="Pending tasks"
+              tasks={pendingTasks}
+              setChecked={setChecked}
+              actionText="Mark as finished"
+              reloadData={loadData}
+            />
+          </Col>
+          <Col>
+            <TaskList
+              title="Finished tasks"
+              tasks={finishedTasks}
+              setChecked={setChecked}
+              actionText="Mark as pending"
+              reloadData={loadData}
+            />
+          </Col>
+        </Row>
       </Layout>
     </GlobalContext.Provider>
   )
