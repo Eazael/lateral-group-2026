@@ -1,5 +1,5 @@
 class GlobalData {
-    backendUrl = "";
+    backendUrl = "http://localhost:5051";
 }
 
 export default GlobalData;

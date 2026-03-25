@@ -4,11 +4,22 @@ using Microsoft.AspNetCore.Mvc;
 using backend.Dto;
 
 var builder = WebApplication.CreateBuilder(args);
+var corsPolicyName = "AllowFrontEnd";
 
 builder.Services.AddTransient<TaskContext>();
 builder.Services.AddValidation();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(corsPolicyName, policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
 
 var app = builder.Build();
+app.UseCors(corsPolicyName);
 
 app.MapGet("/tasks", async (TaskContext taskContext, bool? finished) => 
 {
