@@ -1,3 +1,9 @@
+const headers = {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                };
+const corsMode = 'cors';
+
 const fetchData = async (url, configuration, setErrorData) => {
     try {
         const response = await fetch(url, configuration);
@@ -33,26 +39,31 @@ const saveData = async (url, configuration, setErrorData) => {
 const getTasks = async (globalData, finished, setErrorData) => {
     return await fetchData(globalData.backendUrl + '/tasks?finished=' + finished, {
             method: 'GET',
-            headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-            },
-            mode: 'cors',
+            headers: headers,
+            mode: corsMode,
         }, setErrorData)
 }
 
 const updateFinished = async(globalData, id, finished, setErrorData) => {
     return await saveData(globalData.backendUrl + '/tasks/' + id, {
             method: 'PATCH',
-            headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-            },
-            mode: 'cors',
+            headers: headers,
+            mode: corsMode,
             body: JSON.stringify({
                 finished: finished,
             })
         }, setErrorData)
 }
 
-export { getTasks, updateFinished }
+const createNewTask = async(globalData, description, setErrorData) => {
+    return await saveData(globalData.backendUrl + '/tasks', {
+            method: 'POST',
+            headers: headers,
+            mode: corsMode,
+            body: JSON.stringify({
+                description: description,
+            })
+        }, setErrorData)
+}
+
+export { getTasks, updateFinished, createNewTask }

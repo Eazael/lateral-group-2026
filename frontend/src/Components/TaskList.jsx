@@ -1,7 +1,7 @@
 import { Table, ToggleButton } from "react-bootstrap";
 import Column from "../Classes/Column";
 
-function TaskList({ title, tasks, setChecked }) {
+function TaskList({ title, tasks, setChecked, actionText }) {
 
     const taskColumns = [
         new Column('description', 'Description'),
@@ -36,7 +36,7 @@ function TaskList({ title, tasks, setChecked }) {
                                     value="1"
                                     onChange={() => setChecked(row.id, !row.finished)}
                                 >
-                                    Checked
+                                    {actionText}
                                 </ToggleButton>
                             </td>
                         </tr>
