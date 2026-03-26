@@ -42,11 +42,11 @@ git clone [https://github.com/Eazael/lateral-group-2026.git](https://github.com/
 
 Inside the cloned repository, you will find a README.md file and two main directories:
 
-/backend - Contains the C# backend code.
+* **/backend - Contains the C# backend code.
 
-/frontend - Contains the React frontend code.
+* **/frontend - Contains the React frontend code.
 
-1. Backend Configuration
+## 1. Backend Configuration
 You must configure and start the backend first, otherwise the frontend will have no data to display.
 
 Open the solution file located at backend/backend.csproj using Visual Studio.
@@ -59,7 +59,7 @@ dotnet ef database update
 
 Once the database is created, start the application by running it in Debug or Release mode from within Visual Studio.
 
-2. Frontend Configuration
+## 2. Frontend Configuration
 Open the /frontend directory using Visual Studio Code.
 
 Install the required Node.js dependencies by running:
