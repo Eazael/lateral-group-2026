@@ -1,4 +1,4 @@
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Row, Col } from "react-bootstrap";
 import { useState } from "react";
 import { createNewTask } from "../Services/FetchServices";
 import { GlobalContext } from "../Context/GlobalContext";
@@ -21,26 +21,32 @@ function CreateTask({ reloadData }) {
     return (
         <div className="create-task">
             <Form onSubmit={handleSubmit}>
-                <Form.Group controlId="newTask">
-                    <Form.Label>Task description</Form.Label>
-                    <Form.Control
-                        required
-                        maxLength={512}
-                        minLength={3}
-                        type="text"
-                        placeholder="Enter a description for your task"
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                    />
-                    <Form.Text>
-                        Please enter a description between 3 and 512 characters long
-                    </Form.Text>
-                </Form.Group>
-                <ErrorMessage
-                    error={errorData}
-                    setError={setErrorData}
-                />
-                <Button variant="primary" type="submit">Save new Task</Button>
+                <Row className="align-items-center">
+                    <Col>
+                        <Form.Group controlId="newTask">
+                            <Form.Label>Task description</Form.Label>
+                            <Form.Control
+                                required
+                                maxLength={512}
+                                minLength={3}
+                                type="text"
+                                placeholder="Enter a description for your task"
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}
+                            />
+                            <Form.Text>
+                                Please enter a description between 3 and 512 characters long
+                            </Form.Text>
+                        </Form.Group>
+                        <ErrorMessage
+                            error={errorData}
+                            setError={setErrorData}
+                        />
+                    </Col>
+                    <Col>
+                        <Button variant="primary" type="submit">Save new Task</Button>
+                    </Col>
+                </Row>
             </Form>
         </div>
     )

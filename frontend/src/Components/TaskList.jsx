@@ -81,7 +81,7 @@ function TaskList({ title, tasks, setChecked, actionText, reloadData }) {
                 saveText="Delete"
                 cancelText="Cancel"
                 handleProceed={processDeleteTask}
-                error={errorData}
+                errorData={errorData}
                 setErrorData={setErrorData}
             />
         </div>

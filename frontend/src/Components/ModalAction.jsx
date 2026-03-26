@@ -11,7 +11,7 @@ function ModalAction({ show, setShow, title, description, saveText, cancelText, 
                 <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                {description}
+                <p>{description}</p>
                 <ErrorMessage
                     error={errorData}
                     setError={setErrorData}

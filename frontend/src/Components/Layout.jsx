@@ -5,8 +5,7 @@ function Layout({ children }) {
     return (
         <Container> 
             <Row>
-                <Col></Col>
-                <Col xs={12} md={10}>
+                <Col>
                     <Row >
                         <header>
                             <h1>Task scheduler</h1>
@@ -19,11 +18,10 @@ function Layout({ children }) {
                     </Row>
                     <Row>
                         <footer>
-                        <p>Developed and presented by Christian Virreira on 22. March 2026</p>
+                        <p>Developed and presented by Christian Virreira on 26. March 2026</p>
                     </footer>
                     </Row>
                 </Col>
-                <Col></Col>
             </Row>
         </Container>
     )

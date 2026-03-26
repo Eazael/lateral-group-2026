@@ -28,7 +28,7 @@ function ErrorMessage({error, setError}) {
                 ? (<span>{error.message}</span>)
                 : (<></>)
             }
-            { getErrorList()}
+            <span>{ getErrorList()}</span>
             <Button
                 variant="danger"
                 onClick={deleteError}
