@@ -28,7 +28,7 @@ function CreateTask({ reloadData }) {
                             <Form.Control
                                 required
                                 maxLength={512}
-                                minLength={3}
+                                minLength={5}
                                 type="text"
                                 placeholder="Enter a description for your task"
                                 value={description}
